@@ -1,4 +1,25 @@
-"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.6) Gecko/20070807 Firefox/2.0.0.6",
+const fs = require('fs');
+const url = require('url');
+const net = require('net');
+if (process.argv.length <= 2) {
+	console.log("Usage: node rand.js <url> <time>");
+	console.log("Usage: node rand.js <http://example.com> <60>");
+	process.exit(-1);
+}
+var target = process.argv[2];
+var parsed = url.parse(target);
+var host = url.parse(target).host;
+var time = process.argv[3];
+
+process.on('uncaughtException', function (e) {
+    console.warn(e);
+});
+
+process.on('unhandledRejection', function (e) {
+    console.warn(e);
+});
+const UAs = [
+        "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.6) Gecko/20070807 Firefox/2.0.0.6",
 	"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.6) Gecko/20070804 Firefox/2.0.0.6",
 	"More Firefox 2.0.0.6 user agents strings -->>",
 	"Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.8.1.5) Gecko/20061201 Firefox/2.0.0.5 (Ubuntu-feisty)",
